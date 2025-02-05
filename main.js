@@ -13,7 +13,7 @@ function getFileContents(filePath, startByte, endByte) {
     // read the file data in chunks rather than read entire file
     const stream = fs.createReadStream(filePath,{start:startByte,end:endByte});
 
-    let data = "";
+    let data = ""
     
 
     stream.on("data",(chunk)=>{
