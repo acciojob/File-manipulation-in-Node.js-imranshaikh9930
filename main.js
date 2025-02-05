@@ -5,7 +5,28 @@ const app = express();
 const fs = require('fs');
 
 function getFileContents(filePath, startByte, endByte) {
-  // Implement this function
+  // Implement this function  
+
+
+  return new Promise((resolve,reject)=>{
+
+    // read the file data in chunks rather than read entire file
+    const stream = fs.createReadStream(filePath,{start:startByte,end:endByte});
+
+    let data = "";
+    
+
+    stream.on("data",(chunk)=>{
+      data+=chunk;
+    });
+
+    stream.on("end",()=>{
+      resolve(data);
+    })
+    stream.on("error",(error)=>{
+      reject(error)
+    })
+  })
 }
 
 app.get('/file', (req, res) => {
